@@ -1,0 +1,11 @@
+using UnityEngine;
+
+#NAMESPACE#
+/// <summary>
+/// TODO
+/// </summary>
+[CreateAssetMenu(menuName = "#SCRIPTNAME#", fileName = "#SCRIPTNAME#")]
+internal sealed class #SCRIPTNAME# : ScriptableObject
+{
+	
+}

@@ -1,0 +1,8 @@
+#NAMESPACE#
+/// <summary>
+/// TODO
+/// </summary>
+internal interface #SCRIPTNAME#
+{
+	
+}

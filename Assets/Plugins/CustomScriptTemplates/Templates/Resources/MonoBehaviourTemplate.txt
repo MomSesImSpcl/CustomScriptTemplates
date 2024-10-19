@@ -1,0 +1,10 @@
+using UnityEngine;
+
+#NAMESPACE#
+/// <summary>
+/// TODO
+/// </summary>
+internal sealed class #SCRIPTNAME# : MonoBehaviour
+{
+    
+}
