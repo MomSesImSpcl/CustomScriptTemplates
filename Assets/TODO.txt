@@ -1,0 +1,1 @@
+-Namespace path is not correct, check if it's because of older AssemblyDefinition files without a root namespace.
