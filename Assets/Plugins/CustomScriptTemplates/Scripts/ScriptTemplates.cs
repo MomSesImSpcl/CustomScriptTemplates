@@ -284,11 +284,11 @@ namespace CustomScriptTemplates
 		/// <summary>
 		/// Gets the default assembly the created file will be in.
 		/// </summary>
-		/// <param name="_DirectoryPath">
-		/// The folder where the file will be created.</param>
-		/// <returns>The assembly name the created file will be in. <br/>
+		/// <param name="_DirectoryPath"> <br/>
+		/// The folder where the file will be created. <br/>
 		/// <b>Must be the relative file path from the <see cref="ScriptTemplatesSettings.RootFolder"/>.</b>
-		/// </returns>
+		/// </param>
+		/// <returns>The assembly name the created file will be in.</returns>
 		private static string GetAssembly(string _DirectoryPath)
 		{
 			var _firstpass = false;
