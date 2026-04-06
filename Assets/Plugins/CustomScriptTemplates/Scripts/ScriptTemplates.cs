@@ -40,7 +40,7 @@ namespace CustomScriptTemplates
 		/// <param name="_PathToTemplate">Relative file path (from the <see cref="ScriptTemplatesSettings.RootFolder"/>) to the template <c>.txt</c> file.</param>
 		internal static void CreateCSharpScript(string _FileNameWithExtension, string _PathToTemplate)
 		{
-			ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<CSharpFile>(), _FileNameWithExtension, csIcon, _PathToTemplate);
+			ProjectWindowUtil.StartNameEditingIfProjectWindowExists(EntityId.None, ScriptableObject.CreateInstance<CSharpFile>(), _FileNameWithExtension, csIcon, _PathToTemplate);
 		}
 		
 		/// <summary>
@@ -52,16 +52,16 @@ namespace CustomScriptTemplates
 		/// </param>
 		internal static void CreateTextFile(string _FileNameWithExtension)
 		{
-			ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<TextFile>(), _FileNameWithExtension, textIcon, string.Empty);
+			ProjectWindowUtil.StartNameEditingIfProjectWindowExists(EntityId.None, ScriptableObject.CreateInstance<TextFile>(), _FileNameWithExtension, textIcon, string.Empty);
 		}
 		
 		/// <summary>
 		/// Creates a new <c>.cs</c> file after the name for the file was chosen.
 		/// </summary>
-		private sealed class CSharpFile : EndNameEditAction
+		private sealed class CSharpFile : AssetCreationEndAction
 		{
 			#region Methods
-			public override void Action(int _InstanceId, string _RelativeFilePath, string _PathToTemplate)
+			public override void Action(EntityId _EntityId, string _RelativeFilePath, string _PathToTemplate)
 			{
 				var _csFile = CreateScript(_RelativeFilePath, _PathToTemplate);
 
@@ -81,10 +81,10 @@ namespace CustomScriptTemplates
 		/// Creates a new text file after the name for the file was chosen. <br/>
 		/// <i>The file extension must not necessarily be <c>.txt</c>, it can be anything.</i>
 		/// </summary>
-		private class TextFile : EndNameEditAction
+		private class TextFile : AssetCreationEndAction
 		{
 			#region Methods
-			public override void Action (int _InstanceId, string _RelativeFilePath, string _PathToTemplate)
+			public override void Action(EntityId _EntityId, string _RelativeFilePath, string _PathToTemplate)
 			{
 				ProjectWindowUtil.ShowCreatedAsset(CreateFile(_RelativeFilePath));
 			}
