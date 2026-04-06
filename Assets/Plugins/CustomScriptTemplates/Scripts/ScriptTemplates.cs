@@ -361,8 +361,10 @@ namespace CustomScriptTemplates
 			{
 				_FolderPaths.Insert(0, _RootNamespace);
 			}
+
+			var _namespace = string.Join(".", _FolderPaths.Select(Path.GetFileName));
 			
-			return string.Join(".", _FolderPaths.Select(_FolderPath => Path.GetFileName(_FolderPath).ReplaceWhitespaces()));
+			return RemoveInvalidNamespaceCharacters(_namespace);
 		}
 		
 		/// <summary>
@@ -435,6 +437,26 @@ namespace CustomScriptTemplates
 
 				return _character.ToString();
 			});
+		}
+
+		/// <summary>
+		/// Removes all characters from the given <c>_Namespace</c> that are not allowed in a namespace.
+		/// </summary>
+		/// <param name="_Namespace">The namespace to remove all invalid characters from.</param>
+		/// <returns>Ther given namespace with all invalid characters removed.</returns>
+		private static string RemoveInvalidNamespaceCharacters(string _Namespace)
+		{
+			Span<char> _invalidNamespaceCharacters = stackalloc char[32];
+			_invalidNamespaceCharacters[0] = ' '; _invalidNamespaceCharacters[1] = ','; _invalidNamespaceCharacters[2] = ';'; _invalidNamespaceCharacters[3] = ':'; 
+			_invalidNamespaceCharacters[4] = '!'; _invalidNamespaceCharacters[5] = '?'; _invalidNamespaceCharacters[6] = '\''; _invalidNamespaceCharacters[7] = '"'; 
+			_invalidNamespaceCharacters[8] = '+'; _invalidNamespaceCharacters[9] = '-'; _invalidNamespaceCharacters[10] = '*'; _invalidNamespaceCharacters[11] = '/'; 
+			_invalidNamespaceCharacters[12] = '\\'; _invalidNamespaceCharacters[13] = '%'; _invalidNamespaceCharacters[14] = '='; _invalidNamespaceCharacters[15] = '<'; 
+			_invalidNamespaceCharacters[16] = '>'; _invalidNamespaceCharacters[17] = '('; _invalidNamespaceCharacters[18] = ')'; _invalidNamespaceCharacters[19] = '[';
+			_invalidNamespaceCharacters[20] = ']'; _invalidNamespaceCharacters[21] = '{'; _invalidNamespaceCharacters[22] = '}'; _invalidNamespaceCharacters[23] = '@'; 
+			_invalidNamespaceCharacters[24] = '#'; _invalidNamespaceCharacters[25] = '$'; _invalidNamespaceCharacters[26] = '&'; _invalidNamespaceCharacters[27] = '|'; 
+			_invalidNamespaceCharacters[28] = '^'; _invalidNamespaceCharacters[29] = '~'; _invalidNamespaceCharacters[30] = '´'; _invalidNamespaceCharacters[31] = '`';
+			
+			return _invalidNamespaceCharacters.Aggregate(_Namespace, (_Current, _Character) => _Current.Replace(_Character.ToString(), string.Empty, StringComparison.Ordinal));
 		}
 		#endregion
 	}
